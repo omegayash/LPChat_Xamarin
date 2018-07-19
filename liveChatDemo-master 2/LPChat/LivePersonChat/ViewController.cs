@@ -22,10 +22,13 @@ using Foundation;
           //  ChatBinding.ILPMessagingSDK lPMessagingSDK = new  LPMessagingSDK ();
 
             LPMessagingSDK.Instance.Initialize("33136087", null,out error);
-             
+
+         
                 var conversationQuery = LPMessagingSDK.Instance.GetConversationBrandQuery("33136087", null);
-                viewParams = new LPConversationViewParams(conversationQuery, this, false, null);
-                LPMessagingSDK.Instance.ShowConversation(viewParams, null);
+
+                viewParams = new LPConversationViewParams((ConversationParamProtocol)conversationQuery, this, false, null);
+
+              LPMessagingSDK.Instance.ShowConversation(viewParams, null);
            
 
         }

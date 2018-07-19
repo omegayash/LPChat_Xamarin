@@ -57,88 +57,90 @@ namespace ChatBinding
 
     // @protocol ConversationParamProtocol
     //[BaseType(typeof(ConversationParamProtocol))]
-
-    // [Protocol, Model]
-    [BaseType(typeof(NSObject), Name = "_TtP7LPInfra25ConversationParamProtocol_")]
+    
+     
+   //[BaseType(typeof(NSObject), Name = "_TtP7LPInfra25ConversationParamProtocol_")]
+       [BaseType(typeof(NSObject))]
+     [Protocol(Name = "_TtP7LPInfra25ConversationParamProtocol_" )] 
     interface ConversationParamProtocol
     {
         // @required -(NSArray<LPConversationEntity *> * _Nullable)getConversations __attribute__((warn_unused_result));
-        [Abstract]
+       // [Abstract]
         [NullAllowed, Export("getConversations")]
 
         LPConversationEntity[] Conversations { get; }
 
         // @required -(NSArray<LPConversationEntity *> * _Nullable)getConversations:(NSPredicate * _Nullable)predicate __attribute__((warn_unused_result));
-        [Abstract]
+      //  [Abstract]
         [Export("getConversations:")]
         [return: NullAllowed]
         LPConversationEntity[] GetConversations([NullAllowed] NSPredicate predicate);
 
         // @required -(NSArray<LPConversationEntity *> * _Nullable)getClosedConversations __attribute__((warn_unused_result));
-        [Abstract]
+       // [Abstract]
         [NullAllowed, Export("getClosedConversations")]
 
         LPConversationEntity[] ClosedConversations { get; }
 
         // @required -(LPConversationEntity * _Nullable)getActiveConversation __attribute__((warn_unused_result));
-        [Abstract]
+      //  [Abstract]
         [NullAllowed, Export("getActiveConversation")]
 
         LPConversationEntity ActiveConversation { get; }
 
         // @required -(LPConversationEntity * _Nullable)getOpenConversation __attribute__((warn_unused_result));
-        [Abstract]
+      //  [Abstract]
         [NullAllowed, Export("getOpenConversation")]
 
         LPConversationEntity OpenConversation { get; }
 
         // @required -(NSArray<LPConversationEntity *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount __attribute__((warn_unused_result));
-        [Abstract]
+       // [Abstract]
         [Export("getLatestClosedConversation:")]
         [return: NullAllowed]
         LPConversationEntity[] GetLatestClosedConversation(nint conversationsCount);
 
         // @required -(LPConversationEntity * _Nonnull)createNewConversation __attribute__((warn_unused_result));
-        [Abstract]
+        //[Abstract]
         [Export("createNewConversation")]
 
         LPConversationEntity CreateNewConversation { get; }
 
         // @required -(NSString * _Nonnull)getQueryType __attribute__((warn_unused_result));
-        [Abstract]
+       // [Abstract]
         [Export("getQueryType")]
 
         string QueryType { get; }
 
         // @required -(BOOL)isConversationRelatedToQuery:(LPConversationEntity * _Nonnull)conversation __attribute__((warn_unused_result));
-        [Abstract]
+        //[Abstract]
         [Export("isConversationRelatedToQuery:")]
         bool IsConversationRelatedToQuery(LPConversationEntity conversation);
 
         // @required -(NSString * _Nonnull)getBrandID __attribute__((warn_unused_result));
-        [Abstract]
+        //[Abstract]
         [Export("getBrandID")]
 
         string BrandID { get; }
 
         // @required -(NSString * _Nonnull)getQueryUID __attribute__((warn_unused_result));
-        [Abstract]
+      //  [Abstract]
         [Export("getQueryUID")]
 
         string QueryUID { get; }
 
         // @required -(NSDictionary<NSString *,id> * _Nonnull)getQueryProperties __attribute__((warn_unused_result));
-        [Abstract]
+      //  [Abstract]
         [Export("getQueryProperties")]
 
         NSDictionary<NSString, NSObject> QueryProperties { get; }
     }
 
     // @interface BrandQuery : NSObject <ConversationParamProtocol>
-    [BaseType(typeof(NSObject), Name = "_TtC7LPInfra10BrandQuery")]//, nam = "TtP7LPInfra25ConversationParamProtocol")]
+    [BaseType(typeof(ConversationParamProtocol), Name = "_TtC7LPInfra10BrandQuery")]//, nam = "TtP7LPInfra25ConversationParamProtocol")]
     [DisableDefaultCtor]
     //  [Protocol]
-    interface BrandQuery : ConversationParamProtocol
+    interface BrandQuery :   ConversationParamProtocol
     {
         // -(instancetype _Nonnull)initWithBrandID:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo __attribute__((objc_designated_initializer));
         [Export("initWithBrandID:campaignInfo:")]
@@ -385,9 +387,10 @@ namespace ChatBinding
     }
 
     // @protocol GeneralManagerProtocol
-    // [BaseType(typeof(GeneralManagerProtocol))]
+    [BaseType(typeof(NSObject))]
     //[Protocol, Model]
-    [BaseType(typeof(NSObject), Name = "_TtP7LPInfra22GeneralManagerProtocol_")]
+    // [BaseType(typeof(NSObject), Name = "_TtP7LPInfra22GeneralManagerProtocol_")]
+    [Protocol(Name = "_TtP7LPInfra22GeneralManagerProtocol_")]
     interface GeneralManagerProtocol
     {
         // @required -(void)clearManager;
@@ -1555,7 +1558,7 @@ namespace ChatBinding
 
 
     // @interface LPConversationEntity : NSManagedObject
-    [BaseType(typeof(NSObject), Name = "_TtC7LPInfra20LPConversationEntity")]
+    [BaseType(typeof(NSManagedObject), Name = "_TtC7LPInfra20LPConversationEntity")]
     [DisableDefaultCtor]
     // [Protocol]
     interface LPConversationEntity
@@ -1763,7 +1766,9 @@ namespace ChatBinding
 
     // @protocol LPDataManagerSDKDelegate
     //[Protocol, Model]
-    [BaseType(typeof(NSObject), Name = "_TtP7LPInfra24LPDataManagerSDKDelegate_")]
+    [BaseType(typeof(NSObject))]
+   // [BaseType(typeof(NSObject), Name = "_TtP7LPInfra24LPDataManagerSDKDelegate_")]
+    [Protocol(Name = "_TtP7LPInfra24LPDataManagerSDKDelegate_")]
     interface LPDataManagerSDKDelegate
     {
         // @required -(void)LPMessagingSDKDataEncryptionFailed:(NSError * _Nonnull)error;
@@ -1920,7 +1925,7 @@ namespace ChatBinding
     [BaseType(typeof(NSObject), Name = "_TtC7LPInfra13LPInfraFacade")]
     [DisableDefaultCtor]
     // [Protocol]
-    interface LPInfraFacade//: ConversationParamProtocol
+    interface LPInfraFacade// : ConversationParamProtocol
     {
         // +(instancetype _Nonnull)new __attribute__((deprecated("-init is unavailable")));
         [Static]
@@ -3988,7 +3993,9 @@ namespace ChatBinding
     // @protocol LPAMSFacadeDelegate
 
     // [Protocol, Model]
-    [BaseType(typeof(NSObject), Name = "_TtP5LPAMS19LPAMSFacadeDelegate_")]
+    //[BaseType(typeof(NSObject), Name = "_TtP5LPAMS19LPAMSFacadeDelegate_")]
+    [BaseType(typeof(NSObject))]
+    [Protocol(Name = "_TtP5LPAMS19LPAMSFacadeDelegate_")]
     interface LPAMSFacadeDelegate
     {
         // @optional -(void)conversationDidResolve:(LPConversationEntity * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nullable)endTime;
@@ -4109,9 +4116,10 @@ namespace ChatBinding
 
 
     // @protocol ConversationViewControllerAgentDelegate
-    //  [BaseType(typeof(NSObject),Name ="_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")]
-    [BaseType(typeof(NSObject))]
+       [BaseType(typeof(NSObject),Name ="_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")]
+    //[BaseType(typeof(NSObject))]
     // [Model][Protocol]
+    [Protocol]
     interface ConversationViewControllerAgentDelegate
     {
         // @optional -(void)agentDidChangeUserInputText:(NSString * _Nonnull)text;
@@ -4575,10 +4583,10 @@ namespace ChatBinding
     }
 
     // @protocol LPMessagingAPIDelegate <LPAMSFacadeDelegate>
-    //[BaseType(typeof(NSObject))]
+     [BaseType(typeof(NSObject))]
     //[Protocol, Model]
-    [BaseType(typeof(NSObject), Name = "_TtP14LPMessagingSDK22LPMessagingAPIDelegate_")]
-
+    // [BaseType(typeof(NSObject), Name = "_TtP14LPMessagingSDK22LPMessagingAPIDelegate_")]
+    [Protocol(Name = "_TtP14LPMessagingSDK22LPMessagingAPIDelegate_")]
     interface LPMessagingAPIDelegate : LPAMSFacadeDelegate
     {
     }
@@ -4586,7 +4594,7 @@ namespace ChatBinding
     // @interface LPMessagingSDK : NSObject <UINavigationControllerDelegate>
     [BaseType(typeof(NSObject), Name = "_TtC14LPMessagingSDK14LPMessagingSDK")]
     [DisableDefaultCtor]
-    //   [Protocol]
+    //  [Protocol]
     interface LPMessagingSDK : IUINavigationControllerDelegate
     {
 
@@ -4750,7 +4758,9 @@ namespace ChatBinding
     // @protocol LPMessagingSDKNotificationDelegate
 
     //[Protocol, Model]
-    [BaseType(typeof(NSObject), Name = "_TtP14LPMessagingSDK34LPMessagingSDKNotificationDelegate_")]
+    [Protocol(Name = "_TtP14LPMessagingSDK34LPMessagingSDKNotificationDelegate_"),Model]
+    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject), Name = "_TtP14LPMessagingSDK34LPMessagingSDKNotificationDelegate_")]
     interface LPMessagingSDKNotificationDelegate
     {
         // @optional -(void)LPMessagingSDKNotificationWithDidReceivePushNotification:(LPNotification * _Nonnull)notification;
@@ -4772,7 +4782,9 @@ namespace ChatBinding
 
     // @protocol LPMessagingSDKdelegate
     //  [Protocol, Model]
-    [BaseType(typeof(NSObject), Name = "_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")]
+   [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject), Name = "_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")]
+    [Protocol(Name = "_TtP14LPMessagingSDK22LPMessagingSDKdelegate_"),Model]
     interface LPMessagingSDKdelegate
     {
         // @optional -(void)LPMessagingSDKCustomButtonTapped;
@@ -4988,8 +5000,9 @@ namespace ChatBinding
 
     // @protocol UIAdapterDelegate
     //  [Protocol, Model]
-    [BaseType(typeof(NSObject), Name = "_TtP14LPMessagingSDK17UIAdapterDelegate_")]
-    //[BaseType(typeof(NSObject))]
+  //  [BaseType(typeof(NSObject), Name = "_TtP14LPMessagingSDK17UIAdapterDelegate_")]
+     [BaseType(typeof(NSObject))]
+    [Protocol(Name = "_TtP14LPMessagingSDK17UIAdapterDelegate_")][Model]
     interface UIAdapterDelegate
     {
         // @optional -(BOOL)sendClickedWithMessage:(NSString * _Nonnull)message inConversation:(LPConversationEntity * _Nonnull)inConversation __attribute__((warn_unused_result));
