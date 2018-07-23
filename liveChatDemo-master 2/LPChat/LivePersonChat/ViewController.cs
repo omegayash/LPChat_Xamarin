@@ -25,8 +25,10 @@ using Foundation;
 
 
             conversationQuery = LPMessagingSDK.Instance.GetConversationBrandQuery("33136087", null);
+            if(conversationQuery.ActiveConversation !=null)
             LPMessagingAPI.ClearConversationFromDB(conversationQuery.ActiveConversation);
-
+             
+         //  var a= LPMessagingAPI.GetAllClosedConversations(NSDate.Now);
             //LPMessagingAPI.OpenAllSockets();
            
           //  LPMessagingSDK.Instance.RemoveConversation(conversationQuery );
