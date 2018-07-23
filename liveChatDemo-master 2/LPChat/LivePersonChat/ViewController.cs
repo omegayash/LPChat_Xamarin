@@ -7,6 +7,8 @@ using Foundation;
 {
     public partial class ViewController : UIViewController
     {
+        ConversationParamProtocol conversationQuery;
+        NSError error = null;
         protected ViewController(IntPtr handle) : base(handle)
         {
             // Note: this .ctor should not contain any initialization logic.
@@ -18,19 +20,39 @@ using Foundation;
            // NSError error = null;
             LPConversationViewParams viewParams;
             // Perform any additional setup after loading the view, typically from a nib.
-            NSError error = null;
+           
           //  ChatBinding.ILPMessagingSDK lPMessagingSDK = new  LPMessagingSDK ();
 
-            LPMessagingSDK.Instance.Initialize("33136087", null,out error);
 
-         
-                var conversationQuery = LPMessagingSDK.Instance.GetConversationBrandQuery("33136087", null);
+            conversationQuery = LPMessagingSDK.Instance.GetConversationBrandQuery("33136087", null);
+            LPMessagingAPI.ClearConversationFromDB(conversationQuery.ActiveConversation);
 
-                viewParams = new LPConversationViewParams((ConversationParamProtocol)conversationQuery, this, false, null);
-
-              LPMessagingSDK.Instance.ShowConversation(viewParams, null);
+            //LPMessagingAPI.OpenAllSockets();
            
+          //  LPMessagingSDK.Instance.RemoveConversation(conversationQuery );
+            
 
+            btnInit.TouchUpInside += (o, s) =>
+            {
+              
+
+
+
+                LPMessagingSDK.Instance.ClearHistory(conversationQuery, out error);
+                viewParams = new LPConversationViewParams((ConversationParamProtocol)conversationQuery, null, false, null);
+                LPMessagingSDK.Instance.ResolveConversation(conversationQuery);
+
+
+                LPMessagingSDK.Instance.ShowConversation(viewParams, null);
+            };
+
+            LPMessagingAPI.ClearHistory(conversationQuery);
+        }
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+            LPMessagingAPI.CloseAllSockets();
+            
         }
 
         public override void DidReceiveMemoryWarning()
@@ -38,6 +60,8 @@ using Foundation;
             base.DidReceiveMemoryWarning();
             // Release any cached data, images, etc that aren't in use.
         }
+        
+
     }
 
    
